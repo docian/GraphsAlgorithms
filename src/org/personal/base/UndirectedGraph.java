@@ -3,8 +3,10 @@ package org.personal.base;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
@@ -15,6 +17,8 @@ public class UndirectedGraph {
 	
 	private int[] nodes;	
 	private Set vertices = new HashSet<long[]>();
+	private List adjiacencyLists = new ArrayList<int[]>();
+	
 	private JSONArray varray;
 	
 	public UndirectedGraph(String filePath) throws FileNotFoundException, IOException, ParseException{
@@ -51,9 +55,19 @@ public class UndirectedGraph {
 		return false;
 	}
 	
-	public void createAdjiancentVerticesLists() {
+	public ArrayList isNodeInAdjiacencyLists(int node) {
 		
+		return null;
 	}
+	
+	public ArrayList createAdjiancencyNodeLists() {
+		for(int i: nodes) {
+			List adjNodelist = new ArrayList<int[]>();
+		}
+		return null;
+	}
+	
+
 	
 	public void printVertices() {
 		Iterator iter = vertices.iterator();
