@@ -60,7 +60,7 @@ public class UndirectedGraph {
 		return null;
 	}
 	
-	public ArrayList createAdjiancencyNodeLists() {
+	public ArrayList createAdjiacencyNodeLists() {
 		for(int i: nodes) {
 			List adjNodelist = new ArrayList<int[]>();
 		}
@@ -87,6 +87,14 @@ public class UndirectedGraph {
 			val = (long[])iter.next();
 			System.out.print("["+val[0]+","+val[1]+"],");
 		}
+	}
+	
+	public static void main(String[] s) throws FileNotFoundException, IOException, ParseException{
+		UndirectedGraph udg = new UndirectedGraph("./data/ugraph1.json");
+		System.out.println(udg.createNodeAdjList(2));
+		System.out.println(udg.createNodeAdjList(1));
+		System.out.println(udg.createNodeAdjList(10));
+		System.out.println(udg.createNodeAdjList(12));
 	}
 
 }

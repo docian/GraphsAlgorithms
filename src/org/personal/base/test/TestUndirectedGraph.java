@@ -5,6 +5,7 @@ import static org.testng.Assert.assertFalse;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.json.simple.parser.ParseException;
 import org.personal.base.UndirectedGraph;
@@ -15,10 +16,22 @@ import org.testng.annotations.Test;
 public class TestUndirectedGraph {
 	
 	UndirectedGraph ug;
+	ArrayList adjList1;
+	ArrayList adjList2;
 	
 	@BeforeClass
 	public void setupTests() throws FileNotFoundException, IOException, ParseException {
 		ug = new UndirectedGraph("./data/ugraph1.json");
+		adjList1.add(new Integer(1));
+		adjList1.add(new Integer(2));
+//		adjList1.add(new Integer(5));
+		adjList1.add(new Integer(6));		
+//		adjList1.add(new Integer(7));
+//		adjList1.add(new Integer(9));
+		
+		adjList2.add(new Integer(3));
+		adjList1.add(new Integer(4));
+		adjList1.add(new Integer(8));
 	}
 	
 	@DataProvider(name="ValidNodes")
@@ -36,6 +49,19 @@ public class TestUndirectedGraph {
 	@Test
 	public void printNumberOfNodes() {
 		System.out.println("number of nodes:"+ug.getSize());
+	}
+	
+	@DataProvider(name="AdjiacencyLists")
+	public Object[][] provideAdjiacencyLists(){
+		
+		Object[][] o = {{adjList1,new Integer(1)},{adjList1,new Integer(2)}};		
+		return o;
+		
+	}
+	
+	@Test(dataProvider="ValidNodes")
+	public void testCreateAdjiacencyNodeList(int n) {
+		
 	}
 
 }
