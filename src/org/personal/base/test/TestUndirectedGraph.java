@@ -37,24 +37,5 @@ public class TestUndirectedGraph {
 	public void printNumberOfNodes() {
 		System.out.println("number of nodes:"+ug.getSize());
 	}
-	
-	@Test
-	public void printVerticesArray() {
-		System.out.println("Vertices:");
-		ug.printVertices();
-		System.out.println();		
-	}
-	
-	@Test(dataProvider="ValidNodes") 
-	public void testNodeInVertices(int node) {
-		assertTrue(ug.isNodeInVertices(node));
-	}
-	
-	@Test(dataProvider="InvalidNodes")
-	public void testNodeNotInVertices(int node) {
-		assertFalse(ug.isNodeInVertices(node));
-	}
-	
-
 
 }

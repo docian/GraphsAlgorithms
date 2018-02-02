@@ -16,24 +16,24 @@ import org.json.simple.parser.*;
 public class UndirectedGraph {
 	
 	private int[] nodes;	
-	private Set vertices = new HashSet<long[]>();
+	private Set edges = new HashSet<long[]>();
 	private List adjiacencyLists = new ArrayList<int[]>();
 	
 	private JSONArray varray;
-	
+
 	public UndirectedGraph(String filePath) throws FileNotFoundException, IOException, ParseException{
 		Object obj = new JSONParser().parse(new FileReader(filePath));
         JSONObject jo = (JSONObject) obj;
         long size = (long)jo.get("size");
         nodes = new int[(int)size];
-        varray = (JSONArray)jo.get("vertices");
+        varray = (JSONArray)jo.get("edges");
         Iterator it = varray.iterator();
         JSONArray jsa = new JSONArray() ;
         long[][] iv = new long[(int)size][2];
         for(int k=0;k < varray.size(); k++) {
         	iv[k][0] = (long)(((JSONArray)varray.get(k)).get(0));
         	iv[k][1] = (long)(((JSONArray)varray.get(k)).get(1));        	
-        	vertices.add(iv[k]);
+        	edges.add(iv[k]);
         }
 	}
 	
@@ -41,12 +41,12 @@ public class UndirectedGraph {
 		return nodes.length;
 	}
 	
-	public Set getVertices() {
-		return vertices;
+	public Set getedges() {
+		return edges;
 	}
 	
-	public boolean isNodeInVertices(int node) {
-		Iterator itv = vertices.iterator();
+	public boolean isNodeInedges(int node) {
+		Iterator itv = edges.iterator();
 		long[] vertex = new long[2];
 		while(itv.hasNext()) {
 			vertex = (long[])itv.next();
@@ -69,8 +69,8 @@ public class UndirectedGraph {
 	
 
 	
-	public void printVertices() {
-		Iterator iter = vertices.iterator();
+	public void printedges() {
+		Iterator iter = edges.iterator();
 		long[] val = new long[2];
 		while(iter.hasNext()){
 			val = (long[])iter.next();
