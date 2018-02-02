@@ -67,9 +67,20 @@ public class UndirectedGraph {
 		return null;
 	}
 	
-
+	public ArrayList createNodeAdjList(int node) {
+		ArrayList nodeList = new ArrayList<Integer>();
+		if(node > nodes.length) return null;
+		Iterator it = edges.iterator();
+		nodeList.add(new Integer(node));
+		while(it.hasNext()) {
+			long[] pair = (long[])it.next();
+			if(node == pair[0]) nodeList.add(new Integer((int)pair[1]));
+			else if(node == pair[1]) nodeList.add(new Integer((int)pair[0]));
+		}
+		return nodeList;
+	}
 	
-	public void printedges() {
+	public void printEdges() {
 		Iterator iter = edges.iterator();
 		long[] val = new long[2];
 		while(iter.hasNext()){
