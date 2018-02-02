@@ -1,6 +1,7 @@
 package org.personal.base.test;
 
 import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
 import java.io.FileNotFoundException;
@@ -22,16 +23,18 @@ public class TestUndirectedGraph {
 	@BeforeClass
 	public void setupTests() throws FileNotFoundException, IOException, ParseException {
 		ug = new UndirectedGraph("./data/ugraph1.json");
+		adjList1 = new ArrayList<Integer[]>();
+		adjList2 = new ArrayList<Integer[]>();
 		adjList1.add(new Integer(1));
 		adjList1.add(new Integer(2));
-//		adjList1.add(new Integer(5));
+		adjList1.add(new Integer(5));
 		adjList1.add(new Integer(6));		
-//		adjList1.add(new Integer(7));
-//		adjList1.add(new Integer(9));
+		adjList1.add(new Integer(7));
+		adjList1.add(new Integer(9));
 		
 		adjList2.add(new Integer(3));
-		adjList1.add(new Integer(4));
-		adjList1.add(new Integer(8));
+		adjList2.add(new Integer(4));
+		adjList2.add(new Integer(8));
 	}
 	
 	@DataProvider(name="ValidNodes")
@@ -52,16 +55,14 @@ public class TestUndirectedGraph {
 	}
 	
 	@DataProvider(name="AdjiacencyLists")
-	public Object[][] provideAdjiacencyLists(){
-		
-		Object[][] o = {{adjList1,new Integer(1)},{adjList1,new Integer(2)}};		
-		return o;
-		
+	public Object[][] provideAdjiacencyLists(){		
+		Object[][] o = {{adjList1,new Integer(1)},{adjList2,new Integer(2)}};		
+		return o;		
 	}
 	
-	@Test(dataProvider="ValidNodes")
-	public void testCreateAdjiacencyNodeList(int n) {
-		
+	@Test(dataProvider="AdjiacencyLists")
+	public void testGetAdjiacencyList(ArrayList<Integer> adjLists, Integer node) {
+		assertEquals(adjLists, ug.getAdjiacencyList(node));
 	}
 
 }

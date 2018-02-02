@@ -17,7 +17,7 @@ public class UndirectedGraph {
 	
 	private int[] nodes;	
 	private Set edges = new HashSet<long[]>();
-	private List adjiacencyLists = new ArrayList<int[]>();
+	private List adjiacencyLists = new ArrayList<ArrayList>();
 	
 	private JSONArray varray;
 
@@ -55,8 +55,11 @@ public class UndirectedGraph {
 		return false;
 	}
 	
-	public ArrayList isNodeInAdjiacencyLists(int node) {
-		
+	public ArrayList getAdjiacencyList(int node) {
+		Iterator ita = adjiacencyLists.iterator();
+		while(ita.hasNext()) {
+			if(((ArrayList)ita).contains(new Integer(node))) return (ArrayList)ita;
+		}
 		return null;
 	}
 	
