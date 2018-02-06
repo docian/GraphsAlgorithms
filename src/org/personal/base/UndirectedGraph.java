@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,7 +18,7 @@ public class UndirectedGraph {
 	
 	private int[] nodes;	
 	private Set edges = new HashSet<long[]>();
-	private List adjiacencyLists = new ArrayList<ArrayList>();
+	private ArrayList adjiacencyLists = new ArrayList<ArrayList>();
 	
 	private JSONArray varray;
 
@@ -41,11 +42,11 @@ public class UndirectedGraph {
 		return nodes.length;
 	}
 	
-	public Set getedges() {
+	public Set getEdges() {
 		return edges;
 	}
 	
-	public boolean isNodeInedges(int node) {
+	public boolean isInEdges(int node) {
 		Iterator itv = edges.iterator();
 		long[] vertex = new long[2];
 		while(itv.hasNext()) {
@@ -63,12 +64,6 @@ public class UndirectedGraph {
 		return null;
 	}
 	
-	public ArrayList createAdjiacencyNodeLists() {
-		for(int i: nodes) {
-			List adjNodelist = new ArrayList<int[]>();
-		}
-		return null;
-	}
 	
 	public ArrayList createNodeAdjList(int node) {
 		ArrayList nodeList = new ArrayList<Integer>();
@@ -82,6 +77,37 @@ public class UndirectedGraph {
 		}
 		return nodeList;
 	}
+	
+	public ArrayList<Integer> createAdjListsByDFS(){
+		boolean[] visited = new boolean[nodes.length];
+		ArrayList<Integer> adjLst;
+		for(int i = 1; i <= nodes.length; i++) {
+			Stack<Integer> q = new Stack<Integer>();
+			if(!visited[i-1]) {
+				if(q.isEmpty()) adjLst = new ArrayList<Integer>();
+				q.push(new Integer(i));	
+				visited[i-1] = true;
+			}				
+			Iterator it = edges.iterator();
+			while(it.hasNext()) {
+				long[] tmpEdge = (long[])it.next();
+				if(i == tmpEdge[0]) {
+					adjLst.add(new Integer((int)tmpEdge[1]));
+					visited[(int)tmpEdge[1]-1] = true;					
+				}
+				if(i == tmpEdge[1]) {
+					adjLst.add(new Integer((int)tmpEdge[0]));
+					visited[(int)tmpEdge[0]-1] = true;					
+				}
+//				edges.remove(tmpEdge);
+				adjiacencyLists.add(adjLst);
+			}
+		
+		}
+		return adjiacencyLists;
+	}
+	
+	
 	
 	public void printEdges() {
 		Iterator iter = edges.iterator();
@@ -98,6 +124,7 @@ public class UndirectedGraph {
 		System.out.println(udg.createNodeAdjList(1));
 		System.out.println(udg.createNodeAdjList(10));
 		System.out.println(udg.createNodeAdjList(12));
+		System.out.println(udg.createAdjListsByDFS());
 	}
 
 }
